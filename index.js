@@ -6,7 +6,11 @@ const logger = require('./middleware/Logger'); // imports Logger
 const app = express();
 
 // Init Middleware
-app.use(logger)
+// app.use(logger)
+
+// Body Parser Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Members API Routes
 app.use('/api/members', require('./routes/api/members'));
