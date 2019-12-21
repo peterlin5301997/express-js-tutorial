@@ -1,5 +1,5 @@
 const express = require('express');
-const members = require('../../Members'); // imports Members data
+const members = require('../../MembersData'); // imports Members data
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
 
   const found = members.some(member => {
-    member.id == req.params.id
+    return member.id == req.params.id
   })
 
   if (found) {
