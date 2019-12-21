@@ -65,4 +65,23 @@ router.put('/:id', (req, res) => {
   }
 });
 
+// Delete Member
+router.delete('/:id', (req, res) => {
+
+  const found = members.some(member => {
+    return member.id == req.params.id
+  })
+
+  if (found) {
+    res.json({
+      msg: 'Member Deleted',
+      members: members.filter(member => {
+        return member.id != req.params.id
+      })
+    })
+  } else {
+    res.status(400).json({ msg: `No member with the id of ${req.params.id}` })
+  }
+});
+
 module.exports = router;
