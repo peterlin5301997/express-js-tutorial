@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const members = require('./Members'); // imports Members data
-const logger = require('./Logger'); // imports Logger
+const logger = require('./middleware/Logger'); // imports Logger
 
 const app = express();
 
