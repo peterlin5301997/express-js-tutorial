@@ -27,19 +27,42 @@ router.get('/:id', (req, res) => {
 
 // Create Member
 router.post('/', (req, res) => {
+  // new member object
   const newMember = {
     id: uuid.v4(),
     name: req.body.name,
     email: req.body.email,
     status: "active"
   }
-
+  // condition to require name and email
   if (!newMember.name || !newMember.email) {
     res.status(400).json({ msg: 'Please include a name and email' })
   }
 
-  members.push(newMember);
-  res.json(members)
+  members.push(newMember); // adds new member to array
+  res.json(members); // returns all members including new member
 })
+
+// Update Member
+router.put('/:id', (req, res) => {
+
+  const found = members.some(member => {
+    return member.id == req.params.id
+  })
+
+  if (found) {
+    const updateMember = req.body;
+    members.forEach(member => {
+      if (member.id == req.params.id) {
+        member.name = updateMember.name ? updateMember.name : member.name;
+        member.email = updateMember.email ? updateMember.email : member.email;
+
+        res.json({ msg: 'Member updated', member })
+      }
+    })
+  } else {
+    res.status(400).json({ msg: `No member with the id of ${req.params.id}` })
+  }
+});
 
 module.exports = router;
