@@ -40,7 +40,8 @@ router.post('/', (req, res) => {
   }
 
   members.push(newMember); // adds new member to array
-  res.json(members); // returns all members including new member
+  // res.json(members); // returns all members including new member
+  res.redirect('/'); // redirects to root page
 })
 
 // Update Member
